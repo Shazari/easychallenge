@@ -1,5 +1,5 @@
 import { apiRoutes } from "../api-config/apiRoutes";
-import { BASEURL, httpClient } from "../api-config/httpClient";
+import { httpClient } from "../api-config/httpClient";
 
 const CategoryService = {
   getCategories: async () => {

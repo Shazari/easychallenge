@@ -1,6 +1,7 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategoryService from "../../services/CategoryService";
+import Loader from "../loader/Loader";
 
 function CategoryList(props) {
   //-------------  States ------------//
@@ -26,13 +27,8 @@ function CategoryList(props) {
   };
 
   return (
-    <Stack
-      direction='row'
-      spacing={2}
-      alignItems={"center"}
-      justifyContent={"center"}
-      paddingTop={2}
-    >
+    <>
+      {loading && <Loader />}
       <Button
         key={"all"}
         variant='outlined'
@@ -53,7 +49,7 @@ function CategoryList(props) {
       ) : (
         <></>
       )}
-    </Stack>
+    </>
   );
 }
 
