@@ -17,7 +17,7 @@ const ProductsService = {
           listOfProducts.map(async (product) => {
             const response = await httpClient.get(product.product_url);
             const productDetails = {
-              key: response.data.photo_url,
+              key: product.product_url,
               name: response.data.name,
               category_url: response.data.category_url,
               price: response.data.price,

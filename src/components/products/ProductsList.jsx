@@ -1,6 +1,7 @@
-import { ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ProductsService from "../../services/ProductsService";
+import ProductCard from "./ProductCard";
 
 function ProductsList() {
   //-------------  States ------------//
@@ -20,35 +21,32 @@ function ProductsList() {
     }
     getAllProducts();
   }, []);
+
   return (
     <>
+      {loading && (
+        <Box
+          alignContent={"center"}
+          alignItems={"center"}
+          alignSelf={"center"}
+          textAlign={"center"}
+        >
+          <CircularProgress />
+        </Box>
+      )}
       {products !== null ? (
-        <ImageList>
+        <Grid container spacing={4} style={{ padding: "20px" }}>
           {products.map((item) => (
-            <ImageListItem sx={{ width: 248 }} key={item.key}>
-              {item.photo ? (
-                <img
-                  style={{ width: 248 }}
-                  src={`${item.photo}`}
-                  alt={item.name}
-                  loading='lazy'
-                />
-              ) : (
-                <img
-                  style={{ width: 248 }}
-                  src={`${require("../../assets/images/NoAvailable.jpg")}`}
-                  alt={item.name}
-                  loading='lazy'
-                />
-              )}
-              <ImageListItemBar
-                title={item.name}
-                subtitle={<span>price: {item.price}$</span>}
-                position='below'
+            <Grid item key={item.key}>
+              <ProductCard
+                name={item.name}
+                price={item.price}
+                photo={item.photo}
+                category={item.category_url}
               />
-            </ImageListItem>
+            </Grid>
           ))}
-        </ImageList>
+        </Grid>
       ) : (
         <></>
       )}
