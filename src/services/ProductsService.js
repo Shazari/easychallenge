@@ -1,5 +1,5 @@
 import { apiRoutes } from "../api-config/apiRoutes";
-import { httpClient } from "../api-config/httpClient";
+import { BASEURL, httpClient } from "../api-config/httpClient";
 
 const ProductsService = {
   getProducts: async (page, limit) => {
@@ -16,19 +16,14 @@ const ProductsService = {
         const productsWithDetails = await Promise.all(
           listOfProducts.map(async (product) => {
             const response = await httpClient.get(product.product_url);
-            const productPhoto = await httpClient
-              .get(response.data.photo_url, {
-                headers: { "content-type": "image/jpeg" },
-              })
-              .catch(() => {
-                return null;
-              });
             const productDetails = {
               key: response.data.photo_url,
               name: response.data.name,
               category_url: response.data.category_url,
               price: response.data.price,
-              photo: productPhoto ? productPhoto.data : null,
+              photo: response.data.photo_url
+                ? BASEURL + response.data.photo_url
+                : null,
             };
             return productDetails;
           })

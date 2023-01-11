@@ -25,18 +25,19 @@ function ProductsList() {
       {products !== null ? (
         <ImageList>
           {products.map((item) => (
-            <ImageListItem key={item.key}>
+            <ImageListItem sx={{ width: 248 }} key={item.key}>
               {item.photo ? (
                 <img
-                  src={`data:image/jpeg;base64,${item.photo}`}
+                  style={{ width: 248 }}
+                  src={`${item.photo}`}
                   alt={item.name}
                   loading='lazy'
                 />
               ) : (
                 <img
+                  style={{ width: 248 }}
                   src={`${require("../../assets/images/NoAvailable.jpg")}`}
                   alt={item.name}
-                  width='100'
                   loading='lazy'
                 />
               )}
